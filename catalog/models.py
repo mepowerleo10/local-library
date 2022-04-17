@@ -60,6 +60,12 @@ class Book(models.Model):
         """Returns the URL to access the detail of the record."""
         return reverse("book-detail", args=[str(self.id)])
 
+    def display_genre(self):
+        """Returns the comma separated values of the genre of the book."""
+        return ", ".join(genre.name for genre in self.genre.all()[:3])
+
+    display_genre.short_description = "Genre"
+
 
 class BookInstance(models.Model):
     """A model representing a specific copy of a book (i.e. that can be borrowed from the library)"""
