@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http.request import HttpRequest
+from django.views.generic import ListView
 
 from .models import Author, Book, BookInstance, Genre, Language
 
@@ -25,3 +26,12 @@ def index(request: HttpRequest):
     # Render a HTML document with the template index.html
     # and the data in the context variable
     return render(request, "index.html", context=context)
+
+
+class BookListView(ListView):
+    model = Book
+    context_object_name = "book_list"
+
+    def get_queryset(self):
+        # Return the first five books
+        return Book.objects.all()[:5]
