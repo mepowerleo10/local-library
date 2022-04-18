@@ -6,4 +6,27 @@
 <p><strong>Language:</strong> {{ book.language }}</p>
 <p><strong>Genre:</strong> {{ book.display_genre }}</p>
 
+<table class="table">
+  <thead class="table-light">
+    <td>#</td>
+    <td>ID</td>
+    <td>Imprint</td>
+    <td>Due Back</td>
+    <td>Status</td>
+  </thead>
+  <tbody>
+    {% for instance in book.bookinstance_set.all %}
+    <tr class="{% if instance.status == 'm'%}text-danger{% endif %}">
+      <td>{{ forloop.counter }}</td>
+      <td>{{ instance.id }}</td>
+      <td>{{ intance.imprint }}</td>
+      <td>
+        {% if instance.status != 'a' %} {{ instance.due_back }} {% else %} -
+        {%endif %}
+      </td>
+      <td>{{ instance.status }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 {% endblock content %}
