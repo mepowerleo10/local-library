@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http.request import HttpRequest
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 from .models import Author, Book, BookInstance, Genre, Language
 
@@ -35,3 +35,7 @@ class BookListView(ListView):
     def get_queryset(self):
         # Return the first five books
         return Book.objects.all()[:5]
+
+
+class BookDetailView(DetailView):
+    model = Book
