@@ -31,10 +31,7 @@ def index(request: HttpRequest):
 class BookListView(ListView):
     model = Book
     context_object_name = "book_list"
-
-    def get_queryset(self):
-        # Return the first five books
-        return Book.objects.all()[:5]
+    paginate_by = 10
 
 
 class BookDetailView(DetailView):
